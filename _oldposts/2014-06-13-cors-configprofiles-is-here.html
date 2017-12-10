@@ -1,0 +1,49 @@
+---
+layout: post
+title: Cors.ConfigProfiles is here!
+date: 2014-06-13 12:40:34.000000000 +02:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- ASP.NET
+- C#
+- Web API
+tags: []
+meta:
+  _edit_last: '1'
+  _jetpack_related_posts_cache: a:1:{s:32:"8f6677c9d6b0f903e98ad32ec61f8deb";a:2:{s:7:"expires";i:1511770969;s:7:"payload";a:3:{i:0;a:1:{s:2:"id";i:71;}i:1;a:1:{s:2:"id";i:7;}i:2;a:1:{s:2:"id";i:527;}}}}
+  dsq_thread_id: '4932910799'
+author:
+  login: Wesley
+  email: wesley@gotsharp.be
+  display_name: Wesley
+  first_name: ''
+  last_name: ''
+---
+<p>After working on <a title="Adding an MVC layer on top of a Web API backend" href="http://wesleycabus.be/2014/06/adding-an-mvc-layer-on-top-of-a-web-api-backend/" target="_blank">my previous blog post</a>, where I had to use the EnableCorsAttribute, I thought: "Why can't I make profiles for this in the web.config file, like you can for the OutputCacheAttribute?"</p>
+<p>Enter my brand new, shiny NuGet package: <a title="Cors.ConfigProfiles" href="https://www.nuget.org/packages/Cors.ConfigProfiles/" target="_blank">Cors.ConfigProfiles</a>! It enables you to use the EnableCorsAttribute just like you normally would, but you can also just give it one string parameter which then matches a profile inside the web.config file. So, for example, if you put this attribute on an API controller:</p>
+<pre class="lang:c# decode:true ">[EnableCors("MyApiProfile")]
+public class MyApiController : ApiController {
+   ...
+}</pre>
+<p>Then you can configure that profile in web.config like so:</p>
+<pre class="lang:default decode:true">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;configuration&gt;
+  &lt;configSections&gt;
+    &lt;section name="cors" type="Cors.ConfigProfiles.Configuration.CorsSection, Cors.ConfigProfiles, Version=5.1.3.0, Culture=neutral, PublicKeyToken=253caed373cef676" requirePermission="false" /&gt;
+  &lt;/configSections&gt;
+  &lt;cors&gt;
+    &lt;corsProfiles&gt;
+      &lt;add name="MyApiProfile" 
+           origins="*" 
+           methods="*" 
+           headers="*"
+      /&gt;
+    &lt;/corsProfiles&gt;
+  &lt;/cors&gt;
+&lt;/configuration&gt;</pre>
+<p>And if you want to contribute or just inspect what I did (no unicorns involved though), the code is available on <a title="mvc-cors-profile on GitHub" href="https://github.com/wcabus/mvc-cors-profile" target="_blank">GitHub</a>.</p>
+<p>&nbsp;</p>

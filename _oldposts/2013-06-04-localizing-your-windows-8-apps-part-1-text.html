@@ -1,0 +1,81 @@
+---
+layout: post
+title: 'Localizing your Windows 8 apps – Part 1: Text'
+date: 2013-06-04 21:53:44.000000000 +02:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- C#
+- Tutorial
+- Windows 8 Apps
+tags: []
+meta:
+  _edit_last: '1'
+  _jetpack_related_posts_cache: a:1:{s:32:"8f6677c9d6b0f903e98ad32ec61f8deb";a:2:{s:7:"expires";i:1512171380;s:7:"payload";a:3:{i:0;a:1:{s:2:"id";i:567;}i:1;a:1:{s:2:"id";i:18;}i:2;a:1:{s:2:"id";i:557;}}}}
+  dsq_thread_id: '4914551748'
+author:
+  login: Wesley
+  email: wesley@gotsharp.be
+  display_name: Wesley
+  first_name: ''
+  last_name: ''
+---
+<p>Today, I gave my first MSDN webcast about how to localize a Windows 8 app. For those who missed it, and for the attendees that want to read what I was talking about, here is series of blog posts describing how to do it. You can also watch the session on <a href="http://channel9.msdn.com/posts/Localizing-your-Windows-8-apps">Channel 9</a>.</p>
+<p>If you can’t wait and immediately want to dive in, or if you want to learn how to do this in HTML/JS, then take a look at <a href="http://code.msdn.microsoft.com/windowsapps/Application-resources-and-cd0c6eaa#content">this sample</a>.</p>
+<p>First of all: localizing an app is not hard or difficult. The hardest part is getting the design right if a text exceeds boundaries when it is displayed in another language. Let’s begin by localizing text on controls and in code.</p>
+<p>When localizing text in XAML, you will have to assign a Uid to the controls. In XAML, the Uid property is in the xaml namespace, which typically has the prefix “x”; so to add the Uid, you’ll be using <code>x:Uid="ControlUid"</code>.<br />
+You can freely choose the Uid, and it doesn’t have to be unique. For example, if you have a “Close” button appearing multiple times, you can assign a Uid named “CloseButton” and use that to provide a translation. This translation will then apply to all the different buttons with the Uid “CloseButton”. Also, you can leave your text or content in the XAML design. At run-time, your app will show the translated values instead of the ones specified at design-time.</p>
+<p>XAML code example:</p>
+<pre class="lang:yaml decode:true">&lt;TextBlock 
+    x:Uid="AppTitle" 
+    Grid.Column="1" 
+    Style={StaticResource PageHeaderTextStyle}&gt;
+        Application Title Here
+&lt;/TextBlock&gt;</pre>
+<p>Now, to add translations, you’ll need a .resw file per language or culture that you want to localize your app in. I usually create a folder called Strings (and I’ve seen example apps doing the same thing) in which I’ll create subfolders per language. In my example, I’ve added a folder called “en” and one called “nl”, for English and Dutch resp. In each of these folders, I’ve then added a .resw file by right-clicking and selecting <em>Add &gt; New Item</em>. You’ll find the Resources File item in the General tab.<br />
+When opening a resources file, you can add the Uid’s in this file and start overriding the properties per language:</p>
+<ul>
+<li>For TextBlock and other pure text-based controls, you can add <code>.Text</code> to the Uid to change the text of the control.</li>
+<li>For Buttons, you must use <code>.Content</code> to change the text.</li>
+<li>For buttons in the AppBar that use a style based on AppBarButtonStyle, you must override the Name property of the AutomationProperties object.</li>
+</ul>
+<p>For example:</p>
+<table>
+<tbody>
+<tr>
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>AppTitle.Text</td>
+<td>My Application</td>
+</tr>
+<tr>
+<td colspan="2"><em>A simple TextBlock control, so we override its Text property.</em></td>
+</tr>
+<tr>
+<td>CancelButton.Content</td>
+<td>Cancel</td>
+</tr>
+<tr>
+<td colspan="2"><em>A simple Button control, so we override its Content property.</em></td>
+</tr>
+<tr>
+<td>NewFolderAppBarButton.[using:Windows.UI.Xaml.Automation]AutomationProperties.Name</td>
+<td>New Folder</td>
+</tr>
+<tr>
+<td colspan="2"><em>A button in an App Bar. Here, we must change the Name property of the AutomationProperties object (this is an attached property).</em></td>
+</tr>
+</tbody>
+</table>
+<p>You can also override other properties, like Margin, Width, etc. if necessary, to adjust your layout when text grows larger or smaller. To override attached properties, like the AutomationProperties.Name, you’ll need to add the namespace of the class of the attached property inside your resources file.<br />
+During the talk, someone asked if this syntax is the same for VB.Net, or if it would become [Imports:namespace]:<br />
+for both C# and VB.Net, you must use the [using:namespace] notation.</p>
+<p>When you want to translate strings used in code, like group headers or error messages, you’ll need to create an instance of the <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br206014.aspx" target="_blank">ResourceLoader</a> class. If you named your resources file Resources.resw, then you don’t need to specify a name in the constructor. If you have a resources file called Errors.resw, to organize your error messages for instance, then you’ll need to pass “Errors” into the constructor when retrieving strings from that resources file.<br />
+To retrieve a string, use the <a href="http://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.resources.resourceloader.getstring.aspx" target="_blank">GetString</a> method and pass in the name of the string, like “ErrNoInternetConnection”.</p>
+<p>Finally, you’ll need to set the default language for your application. If the user doesn’t have any of the languages supported by your app set in the control panel, Windows will use the default language of your application. To set this, open the Package.appxmanifest file and change the “Default language” setting on the “Application UI” tab.</p>
+<p>You can download the code that I used when giving my talk <a href="http://sdrv.ms/14eAo51">here</a>. This code demonstrates localizing text.</p>

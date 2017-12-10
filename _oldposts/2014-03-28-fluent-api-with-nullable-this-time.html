@@ -1,0 +1,52 @@
+---
+layout: post
+title: Fluent API with Nullable this time :)
+date: 2014-03-28 09:48:18.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- C#
+tags: []
+meta:
+  _edit_last: '1'
+  _jetpack_related_posts_cache: a:1:{s:32:"8f6677c9d6b0f903e98ad32ec61f8deb";a:2:{s:7:"expires";i:1512870478;s:7:"payload";a:3:{i:0;a:1:{s:2:"id";i:71;}i:1;a:1:{s:2:"id";i:548;}i:2;a:1:{s:2:"id";i:211;}}}}
+author:
+  login: Wesley
+  email: wesley@gotsharp.be
+  display_name: Wesley
+  first_name: ''
+  last_name: ''
+---
+<p>Yesterday, I attended <a href="http://blog.kevindockx.com/post/Fluent-API-Session-Code-Available.aspx" target="_blank">Kevin's session about building a fluent API</a>. One of the things he mentioned while building the API, was that he would have liked to constrain the use of the NotNull extension method to cases where it makes sense. And I thought I knew how, but it was already past 8 PM...</p>
+<p>After he released the code for the session this morning, I took another go at it. And behold:</p>
+<p><a href="https://wesleycabus.be/wp-content/uploads/2014/03/FluentAPI.png"><img class="aligncenter wp-image-36 size-full" src="{{ site.baseurl }}/assets/FluentAPI.png" alt="FluentAPI - Nullable" width="424" height="135" /></a></p>
+<p>&nbsp;</p>
+<p>Now, to achieve this is actually really simple once you know the magic. The original code for the NotNull extension method was this:</p>
+<pre class="lang:c# decode:true">public static RuleBuilder&lt;T, TProp&gt;
+            NotNull&lt;T, TProp&gt;(this RuleBuilder&lt;T, TProp&gt; ruleBuilder)
+            where T : class
+        {
+            return ruleBuilder.AddValidator(new NotNullValidator());
+        }</pre>
+<p>Let's first fix this one, so it only allows reference types. Easy: put another type constraint to make sure that TProp is a reference type:</p>
+<pre class="lang:c# mark:4 decode:true">public static RuleBuilder&lt;T, TProp&gt;
+            NotNull&lt;T, TProp&gt;(this RuleBuilder&lt;T, TProp&gt; ruleBuilder)
+            where T : class
+            where TProp : class
+        {
+            return ruleBuilder.AddValidator(new NotNullValidator());
+        }</pre>
+<p>Now, for Nullable types, we need to add another extension method. One where TProp is something nullable, of course.</p>
+<pre class="lang:c# decode:true">public static RuleBuilder&lt;T, TValue?&gt;
+            NotNull&lt;T, TValue&gt;(this RuleBuilder&lt;T, TValue?&gt; ruleBuilder)
+            where T : class
+            where TValue: struct
+        {
+            return ruleBuilder.AddValidator(new NotNullValidator());
+        }</pre>
+<p>The magic here is in the difference between TValue and TValue? (or Nullable&lt;TValue&gt;). When calling NotNull, we want to pass a struct or value type for the TValue type parameter, but the RuleBuilder will use the nullable one as property type. While we can't define NotNull&lt;T, TValue?&gt; or use Nullable in the type constraint, we can pass it along to the RuleBuilder. The compiler is smart enough to deduce the rest using type inference :)</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

@@ -1,0 +1,44 @@
+---
+layout: post
+title: From GitHub to Nuget via MyGet
+date: 2014-06-16 20:49:36.000000000 +02:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Tutorial
+tags: []
+meta:
+  _edit_last: '1'
+  _jetpack_related_posts_cache: a:1:{s:32:"8f6677c9d6b0f903e98ad32ec61f8deb";a:2:{s:7:"expires";i:1512096285;s:7:"payload";a:3:{i:0;a:1:{s:2:"id";i:211;}i:1;a:1:{s:2:"id";i:527;}i:2;a:1:{s:2:"id";i:71;}}}}
+author:
+  login: Wesley
+  email: wesley@gotsharp.be
+  display_name: Wesley
+  first_name: ''
+  last_name: ''
+---
+<p>For <a title="Cors.ConfigProfiles is here!" href="http://wesleycabus.be/2014/06/cors-configprofiles-is-here/" target="_blank">Cors.ConfigProfiles</a>, I wanted to try something I had seen before: automatically create a NuGet package when I push a new release to GitHub. To do this, I'd need a build server that would kick off when something changes in my master branch. If the build succeeds, it should look for a nuspec file (NuGet specification to build a package) and build that too, unless my build commands already took care of that. Then, I have a nupkg file: a NuGet package. The build server should then publish this new version to NuGet for me. And while we're at it, it would be great if it would also take care of versioning my NuGet package for me, and tag the GitHub repository.</p>
+<p>But I didn't want to set all of this up by myself (developers are lazy, aren't we?), so I made use of <a title="MyGet" href="https://www.myget.org/" target="_blank">MyGet</a> instead :)</p>
+<p><!--more--></p>
+<p>On MyGet, you can configure a build service on a feed you own to start building code when a code repository changes. Currently, MyGet offers support for GitHub, BitBucket, CodePlex and Visual Studio Online, but only for Git, Mercurial or Subversion repositories. MyGet does support TFS environments, but only for Git repositories.<br />
+To get started, go to a feed or create a new one and click left on Build Services. Then, click on the big Add Build Source button and choose the source environment. If you select GitHub, you can select a repository after authenticating: check the "Link?" checkbox for each repository you want to build and click on the Add button. You can optionally choose to automatically start a build when code is committed, and to post a message back to GitHub when the build has completed.<br />
+By default, MyGet will build the master branch when the build service is triggered. You can change this when you click the Edit button:</p>
+<p><a href="https://wesleycabus.be/wp-content/uploads/2014/06/2014-06-16-20_23_41-test-feed-build-Build-services-MyGet-Hosting-your-NuGet-packages-NuGet-S.png"><img class="aligncenter wp-image-241 size-full" src="{{ site.baseurl }}/assets/2014-06-16-20_23_41-test-feed-build-Build-services-MyGet-Hosting-your-NuGet-packages-NuGet-S.png" alt="Edit a build source" width="894" height="105" /></a></p>
+<p>The edit dialog allows you to edit the branch, but also to change the versioning schema being used for your NuGet package. You can also include an increasing build number to make sure that you don't try to push the same version to NuGet :)</p>
+<p><a href="https://wesleycabus.be/wp-content/uploads/2014/06/MyGet-Edit-versioning-schema.png"><img class="aligncenter wp-image-251 size-full" src="{{ site.baseurl }}/assets/MyGet-Edit-versioning-schema.png" alt="MyGet - Edit versioning schema" width="422" height="334" /></a></p>
+<p>&nbsp;</p>
+<p>A very nice addition here is the ability to update the assembly information of your project, so it matches the version of your NuGet package without having to remember to update it yourself!<br />
+There are even more options available:</p>
+<ul>
+<li>to control the build process: which configuration should be build, which platforms and targets, which projects (*.csproj, *.sln, *.bat, ...)...</li>
+<li>which NuGet packages should be added or updated in your feed. By default, all packages that are not in a packages folder will be added, but you can limit this to a list of specific files.</li>
+<li>whether to push symbol (*.pdb) packages as well, useful when debugging code that has been pulled in from NuGet packages</li>
+<li>package and push sources</li>
+</ul>
+<p>Now, you can trigger a build manually by pressing the Build button, or automatically by making a change and pushing the change to the correct branch.</p>
+<p>The only thing I still need to do manually, is pressing the push button on MyGet to push the newest version of my package towards NuGet. Either using the Push Latest button at the top, or the small arrow in the bottom right corner:</p>
+<p><a href="https://wesleycabus.be/wp-content/uploads/2014/06/MyGet-Push-to-NuGet.png"><img class="aligncenter wp-image-261 size-large" src="{{ site.baseurl }}/assets/MyGet-Push-to-NuGet-1024x246.png" alt="MyGet - Push to NuGet" width="840" height="202" /></a></p>
+<p>And that's it!</p>
