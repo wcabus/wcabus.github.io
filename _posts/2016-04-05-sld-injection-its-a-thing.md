@@ -3,10 +3,7 @@ layout: single
 title: SLD Injection, it's a thing
 date: 2016-04-05 12:00:47.000000000 +02:00
 type: post
-categories:
-- C&num;
-- Security
-tags: []
+tags: ["C#", "Security"]
 ---
 
 <p>I'm in the middle of preparing a session about security, and one topic you regularly bump into when thinking about security and writing code is SQL Injection. Although it is the year 2016, there are still people writing code which is vulnerable against SQL Injection.</p>

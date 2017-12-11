@@ -3,10 +3,7 @@ layout: single
 title: Global Azure Bootcamp - Aftermath
 date: 2015-05-19 18:23:58.000000000 +02:00
 type: post
-categories:
-- ASP.NET MVC
-- General
-tags: []
+tags: ["ASP.NET MVC"]
 ---
 
 It's been almost a month now since the last edition of [Global Azure Bootcamp](http://global.azurebootcamp.net/), and I wanted to share with you some of the details of my involvement in this years edition. This year, we had two labs in which you could participate: a racing and a [science lab](http://global.azurebootcamp.net/global-azure-bootcamp-science-lab-2015/). And I helped out with some aspects behind the workings of the science lab: the [Elasticsearch](https://www.elastic.co/products/elasticsearch) cluster and the dashboard website.

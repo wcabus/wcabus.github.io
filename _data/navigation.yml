@@ -2,3 +2,6 @@
 main:
   - title: "About me"
     url: /about-me.html
+
+  - title: "Archive"
+    url: /archive/posts-by-year.html

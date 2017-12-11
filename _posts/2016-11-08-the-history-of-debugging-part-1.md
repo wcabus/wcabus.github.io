@@ -3,11 +3,7 @@ layout: single
 title: 'The History of Debugging: Part 1'
 date: 2016-11-08 23:20:46.000000000 +01:00
 type: post
-categories:
-- General
-tags:
-- debugging
-- history
+tags: ["Debugging", "History"]
 ---
 
 <p>Disclaimer: there might never be <a href="http://www.imdb.com/title/tt0082517/" target="_blank">a Part 2</a>.</p>

@@ -3,10 +3,7 @@ layout: single
 title: 'CSP: we''re not there, yet.'
 date: 2015-10-27 22:00:27.000000000 +01:00
 type: post
-categories:
-- ASP.NET
-- Security
-tags: []
+tags: ["ASP.NET", "Security"]
 ---
 
 CSP, or Content Security Policy, is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross-Site Scripting (XSS) and data injection attacks. In short, you can add this policy using either a <meta> tag or by setting additional headers in your HTTP response, and using the policy you'll limit the origins for resources for that HTTP request. For example:

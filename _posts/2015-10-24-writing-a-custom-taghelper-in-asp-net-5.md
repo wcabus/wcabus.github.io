@@ -3,13 +3,7 @@ layout: single
 title: Writing a custom TagHelper in ASP.NET 5
 date: 2015-10-24 21:10:34.000000000 +02:00
 type: post
-categories:
-- ASP.NET
-- ASP.NET MVC
-tags:
-- asp.net
-- asp.net vnext
-- tag helpers
+tags: ["ASP.NET", "ASP.NET MVC"]
 ---
 
 ASP.NET 5 brings some new features to MVC. One of these features is *TagHelpers*, which allow us to add new attributes to HTML tags (or create custom tags altogether) to add behavior to these tags. At this moment - beta8 - we receive the following TagHelpers out of the box:

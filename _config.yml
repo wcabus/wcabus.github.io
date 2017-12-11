@@ -17,7 +17,7 @@ title: "Wesley Cabus"
 title_separator: "-"
 name: "Wesley Cabus"
 description: ".NET Developer by day, code monkey at night"
-url: "https://wcabus.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://wesleycabus.be" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "" # the subpath of your site, e.g. /blog
 twitter_username: wesleycabus
 github_username:  wcabus
@@ -81,7 +81,7 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 markdown: kramdown
 highlighter: rouge
 lsi: false
-excerpt_separator: "\r\n\r\n"
+excerpt_separator: "\n\n"
 incremental: false
 
 # Markdown Processing
@@ -103,7 +103,7 @@ sass:
 
 
 # Outputting
-permalink: /:year/:month/:title
+permalink: /:year/:month/:title/
 paginate: 5
 paginate_path: /page:num/
 timezone: Europe/Brussels
@@ -148,6 +148,6 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: # true
+      comments: true
       share: true
       related: true
