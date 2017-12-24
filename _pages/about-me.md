@@ -15,3 +15,12 @@ permalink: /about-me.html
 	Lead Developer .NET at [Realdolmen](http://www.realdolmen.com/en)
 * **Location:** [Antwerp](http://en.wikipedia.org/wiki/Antwerp), [Belgium](http://en.wikipedia.org/wiki/Belgium)
 * **Hobbies:** Playing music (mostly piano/keys), DJ-ing, listening to music, watching movies, going to concerts, drinking decent beer/whiskey/rum
+
+## Contact me
+
+In case you want to reach out, you can find me on social media or contact me directly via email:
+
+* **Email:** [wesley@gotsharp.be](mailto:wesley@gotsharp.be)
+* **Twitter:** [@wesleycabus](https://twitter.com/wesleycabus)
+* **GitHub:** [wcabus](https://github.com/wcabus)
+* **LinkedIn:** [My profile](https://www.linkedin.com/in/wcabus)
