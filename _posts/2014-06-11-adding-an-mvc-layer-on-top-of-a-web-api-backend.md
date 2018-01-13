@@ -3,7 +3,7 @@ layout: single
 title: Adding an MVC layer on top of a Web API backend
 date: 2014-06-11 14:04:53.000000000 +02:00
 type: post
-tags: ["ASP.NET", "ASP.NET MVC", "C#", "Web API"]
+tags: ["ASP.NET", "ASP.NET MVC", "C&num;", "Web API"]
 ---
 
 It might just be me, but I don't seem to find a lot of examples out there showing how you can have an ASP.NET MVC website as a front end application using a Web API project as the backend service. Especially so when your front end is as basic as possible: I don't want to end up storing user data twice because I need to request OAuth tokens and store refresh tokens and so on...

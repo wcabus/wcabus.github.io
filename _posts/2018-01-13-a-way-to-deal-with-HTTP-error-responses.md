@@ -3,7 +3,7 @@ layout: single
 title: A way to deal with HTTP error responses
 date: 2018-01-13 23:15:00.000000000 +02:00
 type: post
-tags: ["C#", "Design"]
+tags: ["C&num;", "Design"]
 ---
 
 When I read [Ken's blog post](https://kenbonny.net/2018/01/08/constructor-fun) about an issue he had with a certain class in a project he is working on, his solution didn't sit quite right with me. I know that in Ken's case, the code couldn't be improved any further because of dependencies on other bits. Nothing can stop us however from having a second look at this design with a fresh codebase, right?
