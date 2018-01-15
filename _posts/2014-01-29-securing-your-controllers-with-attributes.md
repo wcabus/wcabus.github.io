@@ -40,4 +40,4 @@ public class RolesAttribute : AuthorizeAttribute
 }
 ```
 
-So now, you can specify as many roles as you like. And I'm quite happy with this. But [@chrissie]("http://twitter.com/chrissie") pointed me towards [FluentSecurity](http://www.fluentsecurity.net), which offers an entirely different approach. Also worth a look!
+So now, you can specify as many roles as you like. And I'm quite happy with this. But [@chrissie]("http://twitter.com/chrissie") pointed me towards [FluentSecurity](https://github.com/kristofferahl/FluentSecurity), which offers an entirely different approach. Also worth a look!

@@ -6,7 +6,7 @@ type: post
 tags: ["C&num;", "ASP.NET", "Web API"]
 ---
 
-After working on [my previous blog post](http://wesleycabus.be/2014/06/adding-an-mvc-layer-on-top-of-a-web-api-backend/), where I had to use the EnableCorsAttribute, I thought: "Why can't I make profiles for this in the web.config file, like you can for the OutputCacheAttribute?"
+After working on [my previous blog post]({{ site.baseurl }}{% post_url 2014-06-11-adding-an-mvc-layer-on-top-of-a-web-api-backend %}), where I had to use the EnableCorsAttribute, I thought: "Why can't I make profiles for this in the web.config file, like you can for the OutputCacheAttribute?"
 
 Enter my brand new, shiny NuGet package: [Cors.ConfigProfiles](https://www.nuget.org/packages/Cors.ConfigProfiles/)! It enables you to use the EnableCorsAttribute just like you normally would, but you can also just give it one string parameter which then matches a profile inside the web.config file. So, for example, if you put this attribute on an API controller:
 
