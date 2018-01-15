@@ -9,8 +9,7 @@ tags: ["ASP.NET", "ASP.NET MVC", "C&num;", "Web API"]
 It might just be me, but I don't seem to find a lot of examples out there showing how you can have an ASP.NET MVC website as a front end application using a Web API project as the backend service. Especially so when your front end is as basic as possible: I don't want to end up storing user data twice because I need to request OAuth tokens and store refresh tokens and so on...
 If you want to dive into the code that I've produced, you can head straight to [GitHub](https://github.com/wcabus/MvcOverWebApi) and fetch it :)<br />
 For more explanation, read on.
-
-
+<!--more-->
 OK, suppose I want to have a Web API on one server and a MVC front end on another server: how do we authenticate our users then, and how do we remember that authentication when accessing the Web API? Let's start by configuring the Web API part.
 
 ### Web API Configuration

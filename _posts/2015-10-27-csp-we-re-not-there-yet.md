@@ -6,7 +6,7 @@ type: post
 tags: ["ASP.NET", "Security"]
 ---
 
-CSP, or Content Security Policy, is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross-Site Scripting (XSS) and data injection attacks. In short, you can add this policy using either a <meta> tag or by setting additional headers in your HTTP response, and using the policy you'll limit the origins for resources for that HTTP request. For example:
+CSP, or Content Security Policy, is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross-Site Scripting (XSS) and data injection attacks. In short, you can add this policy using either a <meta> tag or by setting additional headers in your HTTP response, and using the policy you'll limit the origins for resources for that HTTP request. <!--more-->For example:
 
 * `script-src 'self'` allows loading scripts from the current domain
 * `child-src https://youtube.com` allows the use of <iframe> tags pointing towards YouTube

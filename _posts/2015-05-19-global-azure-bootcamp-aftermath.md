@@ -7,9 +7,8 @@ tags: ["ASP.NET MVC"]
 ---
 
 It's been almost a month now since the last edition of [Global Azure Bootcamp](http://global.azurebootcamp.net/), and I wanted to share with you some of the details of my involvement in this years edition. This year, we had two labs in which you could participate: a racing and a [science lab](http://global.azurebootcamp.net/global-azure-bootcamp-science-lab-2015/). And I helped out with some aspects behind the workings of the science lab: the [Elasticsearch](https://www.elastic.co/products/elasticsearch) cluster and the dashboard website.
-
+<!--more-->
 For this lab, all you had to do was to deploy a cloud service to Azure and scale it up to as many instances as you could spare. These instances would then crunch a lot of data concerning breast cancer research. After the results from your cloud instances were uploaded, they would eventually end up in the Elasticsearch cluster.
-
 
 # Elasticsearch
 This cluster was running on three D11 Azure Virtual Machines (2 cores, 14 GB RAM), so we had one master node and two children, each of them maintaining a full set of the data shards and copies for faster querying and redundancy. At the time, we had no real clue about the amount of data that would end up in this cluster, so we decided to store the data on a separate 200 GB disk (one for each virtual machine). We could easily attach more storage later on if that would've been necessary.

@@ -7,9 +7,7 @@ tags: ["C&num;", "Design"]
 ---
 
 When I read [Ken's blog post](https://kenbonny.net/2018/01/08/constructor-fun) about an issue he had with a certain class in a project he is working on, his solution didn't sit quite right with me. I know that in Ken's case, the code couldn't be improved any further because of dependencies on other bits. Nothing can stop us however from having a second look at this design with a fresh codebase, right?
-
-
-
+<!--more-->
 # v1
 
 We want to wrap HTTP responses into something like `Response<T>`. But, you know, the web is finicky and sometimes stuff breaks somewhere, so we might get a 4xx or 5xx response back. We need to represent these cases as well.
@@ -133,16 +131,17 @@ protected async Task<IResponse<T>> Get<T>(string uri)
         content = await response.Content.ReadAsStringAsync()
             .ConfigureAwait(false);
 
-        response.EnsureSuccessStatusCode();
-        return CreateResponse<T>(response.StatusCode, content);
+        return response.IsSuccessStatusCode ? 
+            CreateResponse<T>(response.StatusCode, content) : 
+            CreateErrorResponse<T>(response.StatusCode, response.ReasonPhrase, originalData: content);
     }
     catch (Exception e)
     {
-        return new ErrorResponse<T>(response?.StatusCode ?? HttpStatusCode.InternalServerError, e.Message)
-        {
-            OriginalData = content,
-            Exception = e
-        };
+        return CreateErrorResponse<T>(
+            response?.StatusCode ?? HttpStatusCode.InternalServerError, 
+            e.Message, 
+            e,
+            content);
     }
 }
 
@@ -163,16 +162,34 @@ private IResponse<T> CreateResponse<T>(HttpStatusCode statusCode, string json)
     }
 }
 
+private IResponse<T> CreateErrorResponse<T>(
+    HttpStatusCode statusCode, 
+    string error, 
+    Exception exception = null, 
+    string originalData = null)
+{
+    return new ErrorResponse<T>(statusCode, error)
+    {
+        Exception = exception,
+        OriginalData = originalData
+    };
+}
+
 ```
 
 The majority of the `Get<T>` method should be familiar if you've ever called HTTP services using an `HttpClient` instance: 
 * We perform a GET /uri and await the response
 * We read the returned data as a string. This contains either the actual data (2xx) or information (4xx, 5xx) about what went wrong.
-* Using `response.EnsureSuccessStatusCode();`, we check for 2xx responses. If the response was good, we call `CreateResponse<T>`. If not, we end up in the exception handler.
-* In the exception handler, we return an `ErrorResponse<T>`
+* Using `response.IsSuccessStatusCode`, we check for 2xx responses. If the response was good, we call `CreateResponse<T>`. If not, we use `CreateErrorResponse<T>`.
+* In the exception handler, we call `CreateErrorResponse<T>` to provide an error response including the exception details.
 
 Inside the `CreateResponse<T>` method, we only need to keep in mind that the returned data might not be what we expect it to be, that is something that can be converted into a `T`. So when that happens, we catch the deserialization exception, and return an `ErrorResponse<T>` instead.
 I also need to mention that, in the [full sample source code](https://github.com/wcabus/response-errorresponse), I've set a default Accept header to only accept JSON from the HTTP service. It would be rather strange to call `JsonConvert.DeserializeObject<T>` with XML, right?
+
+**Update**
+
+I used to call `response.EnsureSuccessStatusCode()` to prevent having to call `CreateErrorResponse<T>` twice (and that used to be a `new ErrorResponse<T>` line instead), but that would raise an unnecessary exception *and* return false information, because there wasn't really an exception to begin with. We just faked one for our convenience. As [Nico Vermeir](https://twitter.com/nicovermeir) pointed out, not causing an exception here is far more elegant. 
+
 
 ## Inspecting the result
 

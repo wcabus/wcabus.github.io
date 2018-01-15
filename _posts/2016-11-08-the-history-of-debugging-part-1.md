@@ -8,6 +8,7 @@ tags: ["Debugging", "History"]
 
 <p>Disclaimer: there might never be <a href="http://www.imdb.com/title/tt0082517/" target="_blank">a Part 2</a>.</p>
 <p>Together with <a href="https://blog.maartenballiauw.be/" target="_blank">Maarten</a> (who already has <a href="https://blog.maartenballiauw.be/post/2016/10/19/making-net-code-less-allocatey-garbage-collector.html" target="_blank">written some content</a> concerning debugging and monitoring software), we're going to write some posts about the concept of debugging code. And to introduce the topic, why not start with a little bit of (mostly personal) history on the matter?</p>
+<!--more-->
 <h1>ENIAC</h1>
 <p>It's hard to imagine nowadays, but writing software wasn't always literally writing: on the <a href="https://en.wikipedia.org/wiki/ENIAC" target="_blank">ENIAC</a> i.e., the programmers had to make physical connections between the different components, replacing burnt out vacuum tubes as they progressed. They did actually write the program on paper first though, and did their very best to run through it <em>step by step</em> before starting to program the actual computer. And even then, they went through the program again: even the ENIAC already supported <em>step-through debugging</em>!</p>
 <p><a href="/assets/eniac.jpg"><img class="aligncenter size-full wp-image-565" src="{{ site.baseurl }}/assets/eniac.jpg" alt="ENIAC" width="994" height="677" /></a></p>

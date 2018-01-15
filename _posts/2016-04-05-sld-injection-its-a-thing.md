@@ -7,6 +7,7 @@ tags: ["C&num;", "Security"]
 ---
 
 <p>I'm in the middle of preparing a session about security, and one topic you regularly bump into when thinking about security and writing code is SQL Injection. Although it is the year 2016, there are still people writing code which is vulnerable against SQL Injection.</p>
+<!--more-->
 <p>But I'm not going to focus on SQL Injection here, I'm going to take it one step further. If you want to read up on SQL Injection, <a href="http://www.bing.com/search?q=sql+injection" target="_blank">Bing</a>/<a href="https://www.google.be/#q=sql+injection" target="_blank">Google</a> is your friend. Or just take a look at good old <a href="http://bobby-tables.com/" target="_blank">Bobby Tables</a>.</p>
 <p>People often think: "It's called SQL Injection, but I'm not using SQL here, so I'm safe."</p>
 <p>Wrong.</p>
