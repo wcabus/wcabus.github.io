@@ -9,9 +9,6 @@
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-remote_theme: "mmistakes/minimal-mistakes"
-minimal_mistakes_skin : "air"
-
 locale: "en"
 title: "Wesley Cabus"
 title_separator: "-"
@@ -108,20 +105,21 @@ paginate: 5
 paginate_path: /page:num/
 timezone: Europe/Brussels
 
-plugins:
-  - jekyll-remote-theme
+# Plugins
+gems:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
+  - jekyll-redirect-from
   - jemoji
 
 whitelist:
-  - jekyll-remote-theme
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
+  - jekyll-redirect-from
   - jemoji
 
 # Archives
