@@ -12,7 +12,7 @@ permalink: /about-me.html
 * **Name:** Wesley Cabus
 * **Age:** 35  
 * **Occupation:**
-	Lead Developer .NET at [Realdolmen](http://www.realdolmen.com/en)
+	Lead Developer at [UCB](https://www.ucb.com/)
 * **Location:** [Antwerp](http://en.wikipedia.org/wiki/Antwerp), [Belgium](http://en.wikipedia.org/wiki/Belgium)
 * **Hobbies:** Playing music (mostly piano/keys), DJ-ing, listening to music, watching movies, going to concerts, drinking decent beer/whiskey/rum
 
